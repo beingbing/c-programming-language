@@ -2,29 +2,16 @@
 #define MAX_CUR_LINE_LENGTH 1000
 
 int get_line(char cur_inp_line[], int max_cur_line_length);
-void copy(char to[], char from[]);
+int removeTrail(char cur_inp_line[]);
 
 main(){
-	
-	int cur_line_len, max_len_seen_till;
-	char cur_inp_line[MAX_CUR_LINE_LENGTH], longest_line_till[MAX_CUR_LINE_LENGTH];
-	
-	max_len_seen_till = 0;
-	
+	int cur_line_len;
+	char cur_inp_line[MAX_CUR_LINE_LENGTH];
+
 	while((cur_line_len = get_line(cur_inp_line, MAX_CUR_LINE_LENGTH)) > 0){
-	
-		if(cur_line_len > max_len_seen_till){
-	
-			max_len_seen_till = cur_line_len;
-			copy(longest_line_till, cur_inp_line);
-	
+		if(removeTrail(cur_inp_line) > 0){
+			printf("%s\n", cur_inp_line);
 		}
-	}
-	
-	if(max_len_seen_till > 0){
-	
-		printf("%s\n", longest_line_till);
-	
 	}
 }
 
@@ -49,10 +36,25 @@ int get_line(char cur_inp_line[], int max_cur_line_length){
 	return i;
 }
 
-void copy(char to[], char from[]){
+int removeTrail(char cur_inp_line[]){
+
 	int i;
-	i=0;
-	while((to[i] = from[i]) != '\0'){
-		++i;
+
+	for(i=0;cur_inp_line[i]!='\n';i++){
+		;
 	}
+
+	--i; // to consider line without \n
+
+	for(i>0; ((cur_inp_line[i] == ' ' || cur_inp_line[i] == '\t')); --i){
+		;
+	}
+
+	if(i>=0){
+		++i;
+		cur_inp_line[i] = '\n';
+		++i;
+		cur_inp_line[i] = '\0';
+	}
+	return i;
 }
