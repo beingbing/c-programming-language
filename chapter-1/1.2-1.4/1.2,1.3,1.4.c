@@ -12,7 +12,6 @@
 // 	}
 // }
 
-
 // to make output pretty, let's right justify it, for this, augment %d with a width
 // #include "stdio.h"
 // main(){
@@ -27,7 +26,6 @@
 // 		fahr = fahr + step;
 // 	}
 // }
-
 
 // making decimal values legit
 // #include "stdio.h"
@@ -45,7 +43,6 @@
 // 	}
 // }
 
-
 // same function with for statement
 // #include "stdio.h"
 // main(){
@@ -62,16 +59,17 @@
 // 	}
 // }
 
-
 // same function with #define
-#include "stdio.h"
+#include <stdio.h>
+
 #define LOWER 0
 #define UPPER 300
 #define STEP 20
-main(){
-	float fahr;
-	printf("fahr\tcelsius\n");
-	for(fahr = LOWER; fahr <= UPPER; fahr += STEP){
-		printf("%3.0f\t%6.2f\n", fahr, 5*(fahr - 32)/9);
-	}
+
+int main()
+{
+	int fahr;
+	for (fahr = LOWER; fahr <= UPPER; fahr = fahr + STEP)
+		printf("%3d %6.1f\n", fahr, (5.0 / 9.0) * (fahr - 32));
+	return 0;
 }
